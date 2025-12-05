@@ -203,4 +203,4 @@ A análise será quantitativa e comparativa, focada em responder às questões G
 
 Vídeo explicativo detalhando as ameaças à validade e o plano de mitigação, conforme solicitado na Entrega 5.
 
-* **Link para o vídeo:** 
+* **Link para o vídeo:** https://youtu.be/mZaC-a8_y_4
