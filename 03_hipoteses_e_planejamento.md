@@ -35,35 +35,36 @@ As hipóteses buscam responder se a cobertura de código é um preditor confiáv
 ## 8. Variáveis, Fatores, Tratamentos e Objetos de Estudo
 
 ### 8.1 Objetos de Estudo
-Os objetos de estudo serão **projetos de software Open-Source escritos em Java**, hospedados no GitHub, que utilizem o framework JUnit 5 e ferramentas de build Maven ou Gradle. Serão selecionados projetos com diferentes tamanhos (LOC) e domínios (ex: bibliotecas utilitárias, parsers).
+Os objetos de estudo serão **projetos de software Open-Source escritos em Java**, hospedados no GitHub. O foco são bibliotecas de backend e utilitários que utilizem o framework JUnit 5 e ferramentas de build Maven ou Gradle.
 
-### 8.2 Tabela de Variáveis
-Abaixo estão descritas todas as variáveis monitoradas no experimento.
+### 8.2 Sujeitos / Participantes
+**Não aplicável.** Este é um experimento *in vitro* (automatizado) que analisa artefatos de software. Não haverá participação de seres humanos (desenvolvedores ou testadores) na execução das tarefas, eliminando variáveis ligadas ao fator humano (cansaço, experiência, etc.).
 
-| Tipo de Variável | Nome da Variável | Descrição | Escala / Unidade |
-| :--- | :--- | :--- | :--- |
-| **Independente** | Técnica de Avaliação | A abordagem utilizada para medir a qualidade dos testes. | Nominal (JaCoCo / PITest) |
-| **Dependente** | Line Coverage | Percentual de linhas executadas pelos testes. | Razão (0-100%) |
-| **Dependente** | Mutation Score | Percentual de mutantes "mortos" (detectados) pelos testes. | Razão (0-100%) |
-| **Dependente** | Tempo de Execução | Tempo total gasto para rodar a análise completa. | Razão (milissegundos/segundos) |
-| **Controle** | Tamanho do Projeto (LOC) | Quantidade de linhas de código do projeto, usada para normalizar comparações. | Inteiro (Linhas) |
-| **Controle** | Complexidade Ciclomática | Complexidade média dos métodos analisados. | Inteiro |
-| **Controle** | Versão do Java | Versão da JDK utilizada para garantir consistência. | Nominal (Ex: JDK 17) |
+### 8.3 Variáveis Independentes (Fatores)
+O fator principal manipulado será a **Técnica de Análise de Qualidade**, com dois níveis categóricos:
+1.  Análise Estrutural (Cobertura).
+2.  Análise baseada em Falhas (Mutação).
 
-### 8.3 Tabela de Fatores e Tratamentos
-O experimento possui um fator principal (a técnica de análise) com dois níveis (tratamentos).
+### 8.4 Tratamentos (Condições Experimentais)
+Cada projeto será submetido a dois tratamentos distintos:
+* **Tratamento 1 (Controle/Padrão):** Execução da suíte de testes monitorada pelo agente **JaCoCo**, utilizando a configuração padrão de contagem de linhas e ramos.
+* **Tratamento 2 (Experimental):** Execução da suíte de testes monitorada pelo **PITest**, utilizando o conjunto padrão de operadores de mutação (Defaults).
 
-| Fator | Tratamentos (Níveis) | Descrição do Tratamento |
+### 8.5 Variáveis Dependentes (Respostas)
+| Variável | Definição | Unidade |
 | :--- | :--- | :--- |
-| **Técnica de Análise de Qualidade** | **T1: Cobertura Tradicional** | Execução da suíte de testes monitorada pelo agente **JaCoCo**, gerando relatório de linhas e ramos cobertos. |
-| | **T2: Teste de Mutação** | Execução da suíte de testes monitorada pelo **PITest**, com geração de mutantes padrão e verificação de sobrevivência. |
+| **Line Coverage** | Percentual de linhas de código executadas. | % (0-100) |
+| **Mutation Score** | Percentual de mutantes mortos sobre o total gerado. | % (0-100) |
+| **Tempo de Execução** | Tempo total gasto pelo processo de build e análise. | Segundos (s) |
 
-**Combinações:**
-Como é um experimento de comparação direta (paired design), cada objeto de estudo passará por ambos os tratamentos.
-* **Combinação 1:** Projeto X + Tratamento T1 (JaCoCo).
-* **Combinação 2:** Projeto X + Tratamento T2 (PITest).
+### 8.6 Variáveis de Controle
+Fatores mantidos constantes ou monitorados para evitar ruído:
+* **Versão do Java:** Todos os experimentos rodarão na mesma JDK (versão 17 ou 21) para evitar diferenças de performance da JVM.
+* **Hardware:** O ambiente de execução será único (mesmo notebook) para não variar o tempo de processamento.
 
----
+### 8.7 Variáveis de Confusão
+* **Estilo de Teste:** Projetos que usam excesso de "Mocks" podem ter alta cobertura e comportamento imprevisível na mutação.
+* **Mitigação:** A seleção dos projetos (Amostragem) buscará evitar repositórios que fujam do padrão de testes unitários clássicos.
 
 ## 9. Desenho Experimental
 
