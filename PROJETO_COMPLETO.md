@@ -431,3 +431,10 @@ Para iniciar a execução (fase de coleta), os seguintes itens devem estar pront
 ### 20.2 Aprovação Final
 O experimento está autorizado para início imediato após a validação desta entrega pelo professor responsável.
 
+---
+
+## Anexos
+
+### A. Apresentação em Vídeo (Entrega 5)
+Link para o vídeo detalhando as ameaças à validade e estratégias de mitigação:
+* [Assistir Vídeo no YouTube](https://www.youtube.com/watch?v=Dk6gNII5IQw&t=3s)
